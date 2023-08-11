@@ -1,0 +1,77 @@
+﻿@model Cinema.ViewModels.CreateVM
+<link rel="stylesheet" href="~/css/create.css" />
+
+
+<div class="container">
+    <!-- Your form code here -->
+
+
+<h2>Create Movie</h2>
+
+<form method="post" asp-action="Create" asp-controller="Home">
+    <div class="form-group">
+        <label for="Title">Title:</label>
+        <input type="text" id="Title" name="Title" required>
+    </div>
+
+    <div class="form-group">
+        <label for="Description">Description:</label>
+        <textarea id="Description" name="Description" rows="4" required></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="StartDate">Start Date:</label>
+        <input type="date" id="StartDate" name="StartDate" required>
+    </div>
+
+    <div class="form-group">
+        <label for="EndDate">End Date:</label>
+        <input type="date" id="EndDate" name="EndDate" required>
+    </div>
+
+    <div class="form-group">
+        <label for="Status">Status:</label>
+        <input type="checkbox" id="Status" name="Status" checked>
+    </div>
+
+    <div class="form-group">
+        <label for="Imgurl">Image URL:</label>
+        <input type="text" id="Imgurl" name="Imgurl" required>
+    </div>
+
+    <div class="form-group">
+        <label for="Price">Price:</label>
+        <input type="number" id="Price" name="Price" step="0.01" required>
+    </div>
+
+    <!-- Fields related to Category -->
+    <div class="form-group">
+        <label for="CategoryId">Category:</label>
+        <select id="CategoryId" name="CategoryId" required>
+            <option value="">Select a Category</option>
+                @foreach(var category in @ViewBag.Categories)
+                {
+                    <option value="@category.CategoryId">@category.Name</option>
+
+                }
+            <!-- Add more options as needed -->
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="ProducerId">Producer:</label>
+        <select id="ProducerId" name="ProducerId" required>
+            <option value="">Select a Producer</option>
+                @foreach (var producer in @ViewBag.Producers)
+                {
+                    <option value="@producer.ProducerId">@producer.Name</option>
+
+                }
+        </select>
+    </div>
+
+   
+
+    <button type="submit">Create</button>
+</form>
+</div>

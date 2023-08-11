@@ -1,0 +1,146 @@
+﻿
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+}
+
+.DetailPage {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:100%
+}
+
+.Detailsitem {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width:1000px;
+    background-color: #fff;
+    border-radius:15px;
+}
+
+.DetailsitemHeader {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#Detailsimg {
+    max-width: 100%;
+    width:400px;
+    height:300px;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+
+}
+
+.Detailsspecifications {
+    margin-top: 20px;
+}
+
+.Detailsactualspec {
+    padding: 10px;
+    display:flex;
+    flex-direction:column;
+}
+
+    .Detailsactualspec h1 {
+        font-size: 32px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .Detailsactualspec a {
+        font-size: 20px;
+        display: block;
+        margin-bottom: 10px;
+        color: #333;
+        text-decoration: none;
+    }
+
+        .Detailsactualspec a:last-child {
+            margin-bottom: 0;
+        }
+
+.imgcontainer {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    justify-content: center;
+}
+
+    .imgcontainer a {
+        text-align: center;
+        margin: 10px;
+        color: #333;
+        text-decoration: none;
+        font-size: 20px;
+    }
+
+    .imgcontainer img {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+        margin-bottom: 5px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+.Detailsfootermovie {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-between;
+    width:1000px;
+}
+
+.Detailsfirst,
+.Detailssecond {
+    padding: 15px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border: none;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+    height:40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    
+}
+
+.Detailsfirst {
+    background-color: forestgreen;
+}
+
+.Detailssecond {
+    background-color: dodgerblue;
+}
+
+    .Detailsfirst:hover,
+    .Detailssecond:hover {
+        background-color: #ff7b00;
+    }
+
+@media (max-width: 600px) {
+    .Detailsactualspec h1 {
+        font-size: 28px;
+    }
+
+    .Detailsactualspec a {
+        font-size: 18px;
+    }
+
+    .Detailsfirst,
+    .Detailssecond {
+        font-size: 20px;
+        padding: 10px 20px;
+    }
+}
+

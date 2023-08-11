@@ -1,0 +1,135 @@
+﻿
+.ItemsContainer {
+    width: 93.5%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.item {
+    height: 450px;
+    width: 450px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.itemHeader {
+    height: 70px;
+    background-color: #19A3B9;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    color: aliceblue;
+    font-size: 19px;
+    font: bold;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.Middle {
+    display: flex;
+    flex-direction: row;
+}
+
+.footermovie {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-width: 1px !important;
+    border-color: rgb(222, 226, 230);
+    border-style: solid !important;
+    height: 60px;
+}
+
+.specifications {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 220px;
+}
+
+.insidespec {
+    width: 80%;
+    height: 80%;
+    margin-bottom: 25px;
+}
+
+.actualspec {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+#img {
+    height: 320px;
+    width: 250px;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #ffffff;
+}
+
+    button.first {
+        background-color: #4CAF50; /* Green */
+        width: 240px;
+        height: 35px;
+        margin-left: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        button.first:hover {
+            background-color: #45a049; /* Slightly darker green on hover */
+        }
+
+    button.second {
+        background-color: #008CBA; /* Blue */
+        margin-right: 10px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 150px;
+    }
+
+        button.second:hover {
+            background-color: #007bb3; /* Slightly darker blue on hover */
+        }
+
+.actor {
+    width: 900px;
+    height: 500px;
+}
+
+.actorDetail {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 800px;
+    gap: 2rem;
+}
+
+.actorimgs {
+    display: inline-block; /* Ensure the container wraps around the image */
+    border-radius: 50%; /* This makes the image appear as a circle */
+    overflow: hidden;
+    height: 150px;
+    width: 150px;
+}
+
+.actualDetails {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}

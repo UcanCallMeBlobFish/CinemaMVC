@@ -1,0 +1,51 @@
+﻿
+@model Movie
+@{
+    var filtered = Model.CinemaMovies.Where(a => a.MovieId == Model.MovieId).ToList(); //get list of cinemas 1:cin 1:cin2 1:cin4
+    var listOfcin = filtered.Select(a => a.CinemaSection.SectionName).ToList();
+
+    var x = "Empty";
+    x = string.Join(",", listOfcin);
+
+    var status = "Available";
+    if (Model.Status is false) status = "Upcomming";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<div class="item">
+    <div class="itemHeader">
+        @Model.Title
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-controller="home" asp-action="edit" asp-route-Id="@Model.MovieId">Edit</a>
+
+        }
+    </div>
+
+    <div class="Middle">
+
+        <img id="img" src="https://timesofindia.indiatimes.com/photo/81274581.cms" alt="" />
+
+        <div class="specifications">
+            <div class="insidespec">
+                <div class="actualspec">
+                    <a><strong>@Model.Description</strong></a>
+                    <a><strong>Cinema:</strong> @x </a>
+                    <a><strong>Category:</strong> @Model.Category.CategoryId </a>
+                    <a><strong>Start Date:</strong> @Model.StartDate </a>
+                    <a><strong>End Date:</strong>  @Model.EndDate </a>
+                    <a><strong>Status:</strong>   @status </a>
+                
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footermovie">
+        <button class="first">Add To Cart Price: @Model.Price $</button>
+        <button class="second"> <a asp-action="details" asp-controller="home" asp-route-Id="@Model.MovieId">Show Details</a></button>
+    </div>
+
+</div>

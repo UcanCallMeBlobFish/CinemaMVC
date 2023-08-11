@@ -1,0 +1,18 @@
+﻿@model List<User>;
+
+
+<div>
+    <form asp-action="addtorole" asp-controller="account" method="post">
+
+        <input type="hidden" name="Role" value="@ViewBag.role">
+        @foreach (var user in Model)
+    {
+            <label><input type="checkbox" name="usernames" value="@user.Email"> @user.Email</label>
+
+        
+    }
+
+    <button type="submit">Submit</button>
+    </form>
+
+</div>

@@ -1,0 +1,18 @@
+﻿@model List<Movie>
+<link href="~/css/index.css" rel="stylesheet" />
+<div class="mom">
+
+<div class="ItemsContainer">
+
+    @foreach(var movie in Model)
+    {
+        @Html.Partial("MovieCard", movie)
+
+    }
+
+   
+
+
+</div>
+
+</div>

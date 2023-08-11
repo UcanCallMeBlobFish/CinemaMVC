@@ -1,0 +1,23 @@
+﻿@model List<Actor>
+<link href="~/css/actoritem.css" rel="stylesheet" />
+<div class="container">
+    
+    
+    <div class="head"> 
+        <div>ProfilePicture</div>
+        <div>FullName</div>
+        <div>Bio</div>
+    </div>
+
+    @foreach(var actor in Model)
+    {
+        @Html.Partial("actorlist",actor)
+       
+    }
+
+
+        
+
+    </div>
+
+</div>

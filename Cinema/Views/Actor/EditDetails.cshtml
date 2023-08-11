@@ -1,0 +1,35 @@
+﻿@model Actor
+
+<form method="post" asp-action="EditDetails" asp-controller="Actor" >
+<center>
+    <div class="actor">
+        <h1>Update @Model.Name </h1>
+
+        <div class="actualDetails">
+                <input type="hidden" asp-for="ActorId" />
+
+                <label asp-for="@Model.Imgurl">Actor Image</label>
+            <input type="text" value="@Model.Imgurl" asp-for="@Model.Imgurl"/>
+
+            <div class="actorDetail">
+                <label asp-for="@Model.Name">Actor Name</label>
+                <input asp-for="@Model.Name" value="@Model.Name" />
+
+                <label asp-for="@Model.LastName">Actor LastName</label>
+                <input asp-for="@Model.LastName" value="@Model.LastName" />
+
+                <label asp-for="@Model.LastName">Actor LastName</label>
+                <input asp-for="@Model.LastName" value="@Model.LastName" />
+
+                <label asp-for="@Model.Description"></label>
+                <input asp-for="@Model.Description" value="@Model.Description"/>
+            </div>
+        </div>
+
+    </div>
+</center>
+    <button type="submit">Save Changes</button>
+
+</form>
+
+

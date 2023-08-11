@@ -1,0 +1,83 @@
+﻿@model Movie
+<link rel="stylesheet" href="~/css/Details.css" />
+
+@{
+    var filtered = Model.CinemaMovies.Where(a => a.MovieId == Model.MovieId).ToList(); //get list of cinemas 1:cin 1:cin2 1:cin4
+    var listOfcin = filtered.Select(a => a.CinemaSection.SectionName).ToList();
+
+    var x = "Empty";
+    x = string.Join(",", listOfcin);
+
+    var actorsFilter = Model.ActorsMovies.Where(a => a.MovieId == Model.MovieId).ToList();
+    var listofactors = actorsFilter.Select(a => a.Actor).ToList();
+
+
+    var status = "Available";
+    if (Model.Status is false) status = "Upcomming";
+}
+
+<div class="DetailPage">
+<div class="Detailsitem">
+   
+    <div class="DetailsitemHeader">
+            <h2><strong>@Model.Title Details</strong></h2>
+    </div>
+
+
+      <center> <div class="imgmiddle">
+
+            <center> <img id="Detailsimg" src="https://timesofindia.indiatimes.com/photo/81274581.cms" alt="" /></center>
+
+        <div class="Detailsspecifications">
+            <div class="Detailsinsidespec">
+                <div class="Detailsactualspec">
+                    <h1><strong>@Model.Title</strong></h1>
+                    <a><strong>@Model.Description</strong></a>
+                            <a><strong>Cinema:</strong>@x  </a>
+                            <a><Strong>Category: </Strong>@Model.Category.CategoryId </a>
+                            <a><strong>Start Date:</strong> @Model.StartDate </a>
+                            <a><strong>End Date:</strong>  @Model.EndDate </a>
+                            <a><strong>Status:</strong>  @Model.Status </a>
+
+                      
+                    
+                </div>
+
+
+            </div>
+
+        </div>
+        </div></center>
+
+
+
+        <div class="imgcontainer">
+            <a>
+                Actors: @foreach (var actor in listofactors)
+                {
+                    <a asp-action="Details" asp-controller="Actor" asp-route-id="@actor.ActorId"> @actor.Name </a>
+                    <img style="height: 70px; width: 70px; border-radius: 50%;" src="@actor.Imgurl" />
+                }
+
+            </a>
+
+            <a>
+                Producers:
+
+                <a asp-action="Details" asp-controller="Producer" asp-route-id="@Model.Producer.ProducerId"> @Model.Producer.Name </a>
+                <img style="height: 70px; width: 70px; border-radius: 50%;" src="@Model.Producer.Imgurl" />
+
+
+            </a>
+            </div>
+
+    </div>
+
+    <div class="Detailsfootermovie">
+            <button class="Detailssecond">Back To List</button>
+        <button class="Detailsfirst">Add To Cart Price: @Model.Price $</button>
+    </div>
+
+</div>
+
+</div>

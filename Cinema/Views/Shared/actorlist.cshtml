@@ -1,0 +1,24 @@
+﻿@model Actor
+
+<div class="ActorsBox">
+    <hr />
+    <div class="item">
+        <img id="actimg" src="@Model.Imgurl" />
+        <div>@Model.Name</div>
+        <div>@Model.Description</div>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-action="EditDetails" asp-controller="actor" asp-route-id="@Model.ActorId">Edit</a>
+
+        }
+        <a asp-action="Details" asp-controller="actor" asp-route-id="@Model.ActorId">Details</a>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-action="Delete" asp-controller="actor" asp-route-id="@Model.ActorId">Delete</a>
+
+        }
+    </div>
+    <hr />
+

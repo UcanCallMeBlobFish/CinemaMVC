@@ -1,0 +1,61 @@
+﻿@model Cinema.ViewModels.RegisterVM;
+<head>
+    <title>Registration Page</title>
+    <link href="~/css/register.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h2>Registration Form</h2>
+        <form method="post" asp-action="Create" asp-controller="Account">
+
+            <div asp-validation-summary="All"></div>
+            <div class="form-group">
+                <label asp-for="Name">Name:</label>
+                <input asp-for="Name" type="text" required />
+                <span asp-validation-for="Name"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Lastname">Lastname:</label>
+                <input asp-for="Lastname" type="text" required />
+                <span asp-validation-for="Lastname"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Username">Username:</label>
+                <input asp-for="Username" type="text" required />
+                <span asp-validation-for="Username"></span>
+
+            </div>
+
+            
+
+            <div class="form-group">
+                <label asp-for="Email">Email:</label>
+                <input asp-for="Email" type="text" required />
+                <span asp-validation-for="Email"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password">Password:</label>
+                <input asp-for="Password" type="password" required />
+                <span asp-validation-for="Password"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ConfirmPassword">ConfirmPassword:</label>
+                <input asp-for="ConfirmPassword" type="password" required />
+                <span asp-validation-for="ConfirmPassword"></span>
+
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Register</button>
+            </div>
+
+        </form>
+    </div>
+</body>

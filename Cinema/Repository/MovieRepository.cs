@@ -5,10 +5,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Cinema.Repository
 {
-    public class MovieRepository : IMovieRepository
+    public class MovieRepository : GenericRepository<Movie>, IMovieRepository
     {
         private readonly AppDbContext _context;
-        public MovieRepository(AppDbContext context)
+        public MovieRepository(AppDbContext context):base(context)
         {
             _context = context;
         }
@@ -27,6 +27,7 @@ namespace Cinema.Repository
                 .ToList();
             return movies;
         }
+
         public Movie GetMovieById(int id)
         {
             var movie = _context.Movies

@@ -2,13 +2,8 @@
 
 namespace Cinema.IRepository
 {
-    public interface IActorRepository
+    public interface IActorRepository : IGenericRepository<Actor>
     {
-        void AddActor(Actor actor);
-        Actor EditActorInformation(Actor actor);
-        Actor GetActorDetails(int id);
-        List<Actor> GetActors();
-        void RemoveActor(int id);
-        void UpdateActor(Actor updatedActor);
+   
     }
 }

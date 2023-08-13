@@ -1,5 +1,6 @@
 ﻿using Cinema.IRepository;
 using Cinema.Models;
+using Cinema.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,48 +9,54 @@ namespace Cinema.Controllers
     [Authorize(Roles ="Admin")]
     public class ActorController : Controller
     {
-        private readonly IActorRepository _actorRepository;
-        public ActorController(IActorRepository actorRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public ActorController(IUnitOfWork unitOfWork)
         {
-            _actorRepository = actorRepository; 
+            _unitOfWork = unitOfWork;
             
         }
         [AllowAnonymous]
-
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var actors = _actorRepository.GetActors();
+            var actors = await _unitOfWork.Actors.GetAllAsync();
             return View(actors);
         }
-        [AllowAnonymous]
 
-        public IActionResult Details(int id)
+
+
+        [AllowAnonymous]
+        public async Task<IActionResult> Details(int id)
         {
-            var actor = _actorRepository.GetActorDetails(id);
+            var actor = await _unitOfWork.Actors.GetByIdAsync(a => a.ActorId == id);
 
             return View(actor);
         }
+
         [HttpGet]
-        public IActionResult EditDetails(int id) 
+        public async  Task<IActionResult> EditDetails(int id) 
         {
-            var actor = _actorRepository.GetActorDetails(id);
+            var actor = await _unitOfWork.Actors.GetByIdAsync(a => a.ActorId == id);
+            await  _unitOfWork.SaveChangesAsync();
+
             return View(actor);
         }
 
 
         [HttpPost]
-        public IActionResult EditDetails(Actor updatedActor)
+        public async Task<IActionResult> EditDetails(Actor updatedActor)
         {
-            _actorRepository.UpdateActor(updatedActor);
+            _unitOfWork.Actors.Update(updatedActor);
+            await _unitOfWork.SaveChangesAsync();
             return RedirectToRoute( new { controller = "actor", action = "details", id = updatedActor.ActorId });
         }
 
         [HttpGet]
         [Route("/actor/Delete/{id:int}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> DeleteAsync(int id)
         {
-            _actorRepository.RemoveActor(id);
-
+            var obj = await _unitOfWork.Actors.GetByIdAsync(a => a.ActorId == id);
+            _unitOfWork.Actors.Delete(obj);
+            await _unitOfWork.SaveChangesAsync();
             return Content("Item is removed ");
         }
 

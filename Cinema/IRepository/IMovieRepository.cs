@@ -2,7 +2,7 @@
 
 namespace Cinema.IRepository
 {
-    public interface IMovieRepository
+    public interface IMovieRepository : IGenericRepository<Movie>
     {
         Movie AddMovie(Movie movie);
         Movie EditMovieDetails(Movie newone);

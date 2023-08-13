@@ -12,23 +12,19 @@ namespace Cinema.Controllers
     public class HomeController : Controller
     {
         private readonly IMovieRepository _movieRepository;
-        private readonly IActorRepository _actorRepository;
-        private readonly ICinemaRepository _cinemaRepository;
-        private readonly ICategoryRepository _categoryRepository;
-        private readonly IProducerRepository _producerRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
 
 
 
-        public HomeController(ICategoryRepository categoryRepository,IMovieRepository movieRepository, IActorRepository actorRepository, ICinemaRepository cinemaRepository, IProducerRepository producerRepository)
+        public HomeController(IUnitOfWork unitOfWork,IMovieRepository movieRepository)
         {
             _movieRepository = movieRepository;
-            _actorRepository = actorRepository;
-            _cinemaRepository = cinemaRepository;
-            _producerRepository = producerRepository;
-            _categoryRepository = categoryRepository;
+           
+            _unitOfWork = unitOfWork;
 
         }
+
 
         [AllowAnonymous]
         public IActionResult Index()
@@ -36,6 +32,7 @@ namespace Cinema.Controllers
             var movieList = _movieRepository.GetAllMovies();
             return View(movieList);
         }
+
 
         [AllowAnonymous]
 
@@ -47,23 +44,21 @@ namespace Cinema.Controllers
 
         
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewBag.CinemaSections = _cinemaRepository.GetAllCinemas();
-
-            ViewBag.Categories = _categoryRepository.GetAllCategory();
-            ViewBag.Producers = _producerRepository.GetAllProducers();
+            ViewBag.CinemaSections = await _unitOfWork.Cinemas.GetAllAsync();
+            ViewBag.Categories = await  _unitOfWork.Categories.GetAllAsync();
+            ViewBag.Producers = await _unitOfWork.Producers.GetAllAsync();
 
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(CreateVM newMovie)
+        public async Task< IActionResult> Create(Movie newMovie)
         {
          
-            
-
-            _movieRepository.AddMovie(newMovie);
+            await _unitOfWork.Movies.CreateAsync(newMovie);
+            await _unitOfWork.SaveChangesAsync();
 
             return View("index");
 
@@ -99,8 +94,6 @@ namespace Cinema.Controllers
             }
             return View("index");
         }
-
-
 
         public IActionResult Privacy()
         {

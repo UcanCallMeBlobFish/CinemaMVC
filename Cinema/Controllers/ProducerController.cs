@@ -9,46 +9,50 @@ namespace Cinema.Controllers
     [Authorize(Roles = "Admin")]
     public class ProducerController : Controller
     {
-        private readonly IProducerRepository _producerRepository;
-        public ProducerController(IProducerRepository producerRepository)
+        private readonly IUnitOfWork _unitOfWork;
+        public ProducerController(IProducerRepository producerRepository, IUnitOfWork unitOfWork)
         {
-            _producerRepository = producerRepository;
+            _unitOfWork = unitOfWork;
         }
 
         [AllowAnonymous]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var actors = _producerRepository.GetAllProducers();
-            return View(actors);
+            var producers = await _unitOfWork.Producers.GetAllAsync();
+            return View(producers);
         }
         [AllowAnonymous]
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var actor = _producerRepository.GetProducerDetails(id);
+            var producer = await _unitOfWork.Producers.GetByIdAsync(a => a.ProducerId == id);
 
-            return View(actor);
+            return View(producer);
         }
+
         [HttpGet]
-        public IActionResult EditDetails(int id)
+        public async Task<IActionResult> EditDetails(int id)
         {
-            var actor = _producerRepository.GetProducerDetails(id);
-            return View(actor);
+            var prod = await _unitOfWork.Producers.GetByIdAsync(a => a.ProducerId == id);
+            return View(prod);
         }
 
 
         [HttpPost]
-        public IActionResult EditDetails(Producer updatedActor)
+        public async Task<ActionResult> EditDetails(Producer updatedActor)
         {
-            _producerRepository.UpdateProducer(updatedActor);
+            _unitOfWork.Producers.Update(updatedActor);
+            await _unitOfWork.SaveChangesAsync();
             return RedirectToRoute(new { controller = "Producer", action = "details", id = updatedActor.ProducerId });
         }
 
         [HttpGet]
         [Route("/producer/Delete/{id:int}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _producerRepository.RemoveProducer(id);
+            var prod = await _unitOfWork.Producers.GetByIdAsync(a=> a.ProducerId == id);
+            _unitOfWork.Producers.Delete(prod);
+             await _unitOfWork.SaveChangesAsync();
 
             return Content("Item is removed ");
         }
